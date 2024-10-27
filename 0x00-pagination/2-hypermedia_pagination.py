@@ -23,9 +23,9 @@ class Server:
         """ Cached dataset """
         if self.__dataset is None:
             with open(self.DATA_FILE) as f:
-                reader = csv.reader(f)
-                dataset = [row for row in reader]
-            self.__dataset = dataset[1:]
+                read = csv.reader(f)
+                dset = [row for row in read]
+            self.__dataset = dset[1:]
 
         return self.__dataset
 
@@ -33,22 +33,22 @@ class Server:
         """ Retrieves a page """
         assert type(page) == int and type(page_size) == int
         assert page > 0 and page_size > 0
-        start, end = index_range(page, page_size)
-        data = self.dataset()
-        if start > len(data):
+        s, e = index_range(page, page_size)
+        d = self.dataset()
+        if s > len(d):
             return []
-        return data[start:end]
+        return d[s:e]
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
         """ Retrieves information """
-        data = self.get_page(page, page_size)
-        start, end = index_range(page, page_size)
-        total_pages = math.ceil(len(self.__dataset) / page_size)
+        d = self.get_page(page, page_size)
+        s, e = index_range(page, page_size)
+        t_pages = math.ceil(len(self.__dataset) / page_size)
         return {
-            'page_size': len(data),
+            'page_size': len(d),
             'page': page,
-            'data': data,
-            'next_page': page + 1 if end < len(self.__dataset) else None,
-            'prev_page': page - 1 if start > 0 else None,
-            'total_pages': total_pages
+            'data': d,
+            'next_page': page + 1 if e < len(self.__dataset) else None,
+            'prev_page': page - 1 if s > 0 else None,
+            'total_pages': t_pages
         }

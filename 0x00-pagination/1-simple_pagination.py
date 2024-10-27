@@ -23,9 +23,9 @@ class Server:
         """ Cached dataset """
         if self.__dataset is None:
             with open(self.DATA_FILE) as f:
-                reader = csv.reader(f)
-                dataset = [row for row in reader]
-            self.__dataset = dataset[1:]
+                read = csv.reader(f)
+                dset = [row for row in read]
+            self.__dataset = dset[1:]
 
         return self.__dataset
 
@@ -33,8 +33,8 @@ class Server:
         """ Retrieves a page """
         assert type(page) == int and type(page_size) == int
         assert page > 0 and page_size > 0
-        start, end = index_range(page, page_size)
+        s, e = index_range(page, page_size)
         data = self.dataset()
-        if start > len(data):
+        if s > len(data):
             return []
-        return data[start:end]
+        return data[s:e]

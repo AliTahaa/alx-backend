@@ -6,12 +6,12 @@ from flask_babel import Babel
 
 
 class Config:
-  """Config class"""
+    """Config class"""
 
-  DEBUG = True
-  LANGUAGES = ["en", "fr"]
-  BABEL_DEFAULT_LOCALE = "en"
-  BABEL_DEFAULT_TIMEZONE = "UTC"
+    DEBUG = True
+    LANGUAGES = ["en", "fr"]
+    BABEL_DEFAULT_LOCALE = "en"
+    BABEL_DEFAULT_TIMEZONE = "UTC"
 
 
 app = Flask(__name__)
@@ -22,17 +22,17 @@ babel = Babel(app)
 
 @babel.localeselector
 def select_locale() -> str:
-  """Retrieve locale"""
-  user_locale = request.args.get('locale')
-  if user_locale in app.config['LANGUAGES']:
-    return user_locale
-  return request.accept_languages.best_match(app.config['LANGUAGES'])
+    """Retrieve locale"""
+    user_locale = request.args.get('locale')
+    if user_locale in app.config['LANGUAGES']:
+        return user_locale
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 @app.route('/')
 def home() -> str:
-  """Default route"""
-  return render_template("4-index.html")
+    """Default route"""
+    return render_template("4-index.html")
 
 # Uncomment this line and comment the @babel.localeselector
 # to get this error:
@@ -41,4 +41,4 @@ def home() -> str:
 
 
 if __name__ == "__main__":
-  app.run()
+    app.run()

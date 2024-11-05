@@ -7,11 +7,11 @@ from flask_babel import Babel
 
 
 class Config:
-  '''Configuration class for Flask app'''
+    '''Configuration class for Flask app'''
 
-  LANGUAGES = ["en", "fr"]
-  BABEL_DEFAULT_LOCALE = "en"
-  BABEL_DEFAULT_TIMEZONE = "UTC"
+    LANGUAGES = ["en", "fr"]
+    BABEL_DEFAULT_LOCALE = "en"
+    BABEL_DEFAULT_TIMEZONE = "UTC"
 
 
 app = Flask(__name__)
@@ -23,9 +23,9 @@ babel = Babel(app)
 
 @app.route('/')
 def home():
-  '''Home route rendering the template'''
-  return render_template("1-index.html")
+    '''Home route rendering the template'''
+    return render_template("1-index.html")
 
 
 if __name__ == "__main__":
-  app.run(debug=True)
+    app.run(debug=True)
